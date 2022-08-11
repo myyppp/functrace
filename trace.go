@@ -2,7 +2,7 @@
 
 // 编译时指定 -tags trace 参数
 // go build -tags trace
-package main
+package functrace
 
 import (
 	"bytes"
@@ -31,7 +31,9 @@ func printTrace(id uint64, name, typ string, count int) {
 	fmt.Printf("g[%02d]:%s%s%s\n", id, strings.Repeat("\t", count), typ, name)
 }
 
-func trace() func() {
+func Trace() func() {
+	// 获得当前 G 的函数调用栈上的信息
+	// pc 程序计数器
 	pc, _, _, ok := runtime.Caller(1)
 	if !ok {
 		panic("not found caller")
@@ -43,7 +45,7 @@ func trace() func() {
 
 	mu.Lock()
 	cnt := m[id]
-	m[id] = cnt + 1
+	m[id] = cnt + 1 // 获取当前 gid 对应的缩进层次，并保存
 	mu.Unlock()
 	printTrace(id, name, "->", cnt+1)
 
