@@ -91,7 +91,7 @@ func Rewrite(filename string) ([]byte, error) {
 	}
 	// fmt.Printf("%#v\n", *oldAST)
 
-	if !hasFuncDecl(oldAST) {
+	if !hasFuncDecl(oldAST) { // 源码不含有函数声明
 		return nil, nil
 	}
 
@@ -101,7 +101,7 @@ func Rewrite(filename string) ([]byte, error) {
 	addDeferTraceIntoFuncDecls(oldAST)
 
 	buf := &bytes.Buffer{}
-	err = format.Node(buf, fset, oldAST)
+	err = format.Node(buf, fset, oldAST) // 将 AST 转化回 Go 源码
 	if err != nil {
 		return nil, fmt.Errorf("error formatting new code: %w", err)
 	}

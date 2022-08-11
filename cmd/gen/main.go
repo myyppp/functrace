@@ -53,7 +53,7 @@ func main() {
 		return
 	}
 	if !wrote {
-		fmt.Println(string(newSrc))
+		fmt.Println(string(newSrc)) // 生成的代码输出到 stdout 上
 		return
 	}
 	// 写入源文件
