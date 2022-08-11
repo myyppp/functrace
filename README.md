@@ -25,7 +25,7 @@ func Trace() func() {
 
 2. 利用 `go build tags` 添加 trace 开关
 
-3. 解析 Go 源码为 AST，向 AST 的所有函数声明中注入 Trace() 函数
+3. 解析 Go 源码为 AST，向 AST 的所有函数声明中注入 `Trace()` 函数
 
 ## 快速开始
 
