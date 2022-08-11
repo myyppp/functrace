@@ -1,6 +1,6 @@
 //go:build !trace
 
-package main
+package functrace
 
 func trace() func() {
 	return func() {}
